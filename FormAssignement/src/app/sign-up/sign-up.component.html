@@ -1,0 +1,181 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <h1 class="text-center">SignUp Form</h1>
+    </div>
+    <div class="col-6">
+      <h1 class="text-center">Table</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <form #DemoForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group col-sm-8">
+          <label for="fname" class="m-2">Name</label>
+          <input
+            type="text"
+            class="form-control m-2"
+            id="fname"
+            aria-describedby="emailHelp"
+            placeholder="Enter your Name"
+            name="name"
+            required
+            minlength="7"
+            [(ngModel)]="user.name"
+            #name="ngModel"
+          />
+          <div
+            *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="alert"
+          >
+            <div *ngIf="name.errors?.['required']" class="alert alert-danger">
+              Name is required.
+            </div>
+            <div *ngIf="name.errors?.['minlength']" class="alert alert-danger">
+              Name must be at least 7 characters long.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-sm-8">
+          <label for="exampleInputPassword1" class="m-2">Father's Name </label>
+          <input
+            type="text"
+            class="form-control m-2"
+            id="inputcollege"
+            placeholder="Enter your Father's Name"
+            name="fname"
+            ngModel
+            required
+            minlength="7"
+            #fname="ngModel"
+            [(ngModel)]="user.fname"
+          />
+          <div
+            *ngIf="fname.invalid && (fname.dirty || fname.touched)"
+            class="alert"
+          >
+            <div *ngIf="fname.errors?.['required']" class="alert alert-danger">
+              Father Name is required.
+            </div>
+            <div *ngIf="fname.errors?.['minlength']" class="alert alert-danger">
+              Name must be at least 7 characters long.
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-sm-8">
+          <label for="exampleInputPassword1" class="m-2">Email</label>
+          <input
+            type="email"
+            class="form-control m-2"
+            id="inputcgpa"
+            placeholder="Enter your email"
+            name="Email"
+            required
+            #Email="ngModel"
+            [(ngModel)]="user.Email"
+            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            ngModel
+          />
+          <div
+            *ngIf="Email.invalid && (Email.dirty || Email.touched)"
+            class="alert"
+          >
+            <div *ngIf="Email.errors?.['required']" class="alert alert-danger">
+              Email is required.
+            </div>
+            <div *ngIf="Email.errors?.['pattern']" class="alert alert-danger">
+              Enter a valid Email
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-sm-8">
+          <label for="exampleInputPassword1" class="m-2">Password</label>
+          <input
+            type="text"
+            class="form-control m-2"
+            id="inputyear"
+            placeholder="Enter your Password"
+            name="Pwd"
+            #Pwd="ngModel"
+            required
+            minlength="8"
+            maxlength="20"
+            [(ngModel)]="user.Pwd"
+            ngModel
+          />
+          <div *ngIf="Pwd.invalid && (Pwd.dirty || Pwd.touched)" class="alert">
+            <div *ngIf="Pwd.errors?.['required']" class="alert alert-danger">
+              Password is required.
+            </div>
+            <div *ngIf="Pwd.errors?.['minlength']" class="alert alert-danger">
+              Password must be at least 8 characters long.
+            </div>
+            <div *ngIf="Pwd.errors?.['maxlength']" class="alert alert-danger">
+              Password must be at most 20 characters long.
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-sm-8">
+          <label for="exampleInputPassword1" class="m-2">Phone number</label>
+          <input
+            type="number"
+            class="form-control m-2"
+            id="inputdate"
+            placeholder="Enter your phone number"
+            name="Phone"
+            ngModel
+            required
+            minlength="10"
+            maxlength="10"
+            pattern="^\d{10}$"
+            #Phone="ngModel"
+            [(ngModel)]="user.Phone"
+          />
+          <div
+            *ngIf="Phone.invalid && (Phone.dirty || Phone.touched)"
+            class="alert"
+          >
+            <div *ngIf="Phone.errors?.['required']" class="alert alert-danger">
+              Mobile number is required.
+            </div>
+            <div *ngIf="Phone.errors?.['minlength']" class="alert alert-danger">
+              number contains at least 10 digit
+            </div>
+            <div *ngIf="Phone.errors?.['maxlength']" class="alert alert-danger">
+              number contains at most 10 digit
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          [disabled]="!DemoForm.valid"
+          class="btn btn-primary m-4"
+        >
+          SignUp
+        </button>
+      </form>
+    </div>
+    <div class="col-6">
+      <table class="table table-striped table-dark table-hover" id="display">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Father Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Password</th>
+            <th scope="col">Phone number</th>
+          </tr>
+          <tr *ngFor="let user of users">
+            <td>{{ user.name }}</td>
+            <td>{{ user.fname }}</td>
+            <td>{{ user.Email }}</td>
+            <td>{{ user.Pwd }}</td>
+            <td>{{ user.Phone }}</td>
+          </tr>
+        </thead>
+        <tbody class="table-body" id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
